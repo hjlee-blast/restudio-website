@@ -105,8 +105,8 @@ section :where(h1, h2) {
   gap: 10px;
   border-radius: 999px;
   padding: 0 26px;
-  background: #f2f4f3;
-  color: #52606d;
+  background: var(--eco-lab-green);
+  color: #ffffff;
   font-size: clamp(15px, 0.96vw, 18px);
   font-weight: 600;
   line-height: 1;
@@ -117,18 +117,10 @@ section :where(h1, h2) {
     transform 0.2s ease;
 }
 
-.eco-material-lab-hero__links a:first-child {
-  background: var(--eco-lab-green);
-  color: #ffffff;
-}
-
 .eco-material-lab-hero__links a:hover {
+  background: #14865a;
+  color: #ffffff;
   transform: translateY(-1px);
-}
-
-.eco-material-lab-hero__links a:not(:first-child):hover {
-  background: #e8edeb;
-  color: #28382f;
 }
 
 .eco-material-lab-hero__links a:active {
@@ -5065,8 +5057,8 @@ section :where(h1, h2) {
   mix-blend-mode: normal;
 }
 
-.eco-certification-grid__image--sgs {
-  max-width: 150px;
+.eco-certification-grid__image--fsc {
+  max-width: 160px;
 }
 
 .eco-certification-grid img[src$="industrial-design-company-color.png"] {
@@ -5396,13 +5388,20 @@ body:has(.industry-consulting-page) .ai-chat-widget {
 .stories-list-filters {
   display: grid;
   margin-top: clamp(70px, 6vw, 106px);
-  grid-template-columns: 0.95fr 0.75fr 1fr;
-  gap: clamp(44px, 7vw, 140px);
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+
+.stories-list-filter {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
 }
 
 .stories-list-filter strong {
   display: block;
-  margin-bottom: 18px;
+  margin-top: 4px;
   color: rgba(255, 255, 255, 0.86);
   font-size: 15px;
   font-weight: 500;
@@ -6329,6 +6328,7 @@ body:has(.industry-consulting-page) .ai-chat-widget {
   width: min(calc(100% - 240px), 1760px);
   margin: 0 auto;
   padding: clamp(92px, 7vw, 132px) 0 clamp(70px, 5.6vw, 108px);
+  scroll-margin-top: 96px;
 }
 
 .company-history h2 {
@@ -6567,6 +6567,7 @@ body:has(.industry-consulting-page) .ai-chat-widget {
   grid-template-columns: minmax(260px, 0.46fr) minmax(0, 1fr);
   gap: clamp(58px, 8vw, 128px);
   padding: clamp(72px, 7vw, 118px) 0;
+  scroll-margin-top: 96px;
 }
 
 .company-process aside {
@@ -6680,6 +6681,11 @@ body:has(.industry-consulting-page) .ai-chat-widget {
   padding: 12px 0 34px;
 }
 
+.company-development__table--why article {
+  grid-template-columns: 48px minmax(190px, 280px) minmax(0, 1fr);
+  column-gap: clamp(34px, 3vw, 58px);
+}
+
 .company-development__table article:last-child,
 .company-materials__item:last-child {
   border-bottom: 0;
@@ -6741,6 +6747,18 @@ body:has(.industry-consulting-page) .ai-chat-widget {
   font-size: 15px;
   font-weight: 500;
   line-height: 1.55;
+}
+
+.company-materials__copy > strong {
+  display: block;
+  color: #07100b;
+  font-size: clamp(16px, 1vw, 20px);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.company-materials__copy > strong + p {
+  margin-top: 34px;
 }
 
 .company-materials__copy ul {
@@ -6846,18 +6864,10 @@ body:has(.industry-consulting-page) .ai-chat-widget {
   line-height: 1.35;
 }
 
-.company-regulation__table p {
-  margin: 0;
-  color: #27312c;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.5;
-}
-
 .company-regulation__table ul {
   display: grid;
   gap: 4px;
-  margin: 12px 0 0;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
@@ -6936,6 +6946,7 @@ body:has(.industry-consulting-page) .ai-chat-widget {
   grid-template-columns: minmax(0, 1fr) minmax(520px, 1fr);
   gap: clamp(54px, 4.8vw, 86px);
   padding: clamp(82px, 7vw, 124px) 0 clamp(86px, 7vw, 132px);
+  scroll-margin-top: 96px;
 }
 
 .company-recruit h2,
@@ -8053,7 +8064,6 @@ body:has(.industry-consulting-page) .ai-chat-widget {
     font-size: 18px;
   }
 
-  .company-regulation__table p,
   .company-regulation__table li {
     font-size: 15px;
   }
@@ -8201,8 +8211,13 @@ body:has(.industry-consulting-page) .ai-chat-widget {
     gap: 24px;
   }
 
+  .stories-list-filter {
+    grid-template-columns: 96px minmax(0, 1fr);
+    gap: 16px;
+  }
+
   .stories-list-filter strong {
-    margin-bottom: 12px;
+    margin-top: 2px;
     font-size: 14px;
   }
 
@@ -14339,7 +14354,8 @@ body:has(.industry-consulting-page) .ai-chat-widget {
     flex-direction: column;
     justify-content: center;
     overflow: visible;
-    padding: 0;
+    box-sizing: border-box;
+    padding: clamp(72px, 7vw, 120px) 0 0;
   }
 
   .regulatory-master-showcase-header {
@@ -14374,8 +14390,9 @@ body:has(.industry-consulting-page) .ai-chat-widget {
 
   .regulatory-master-showcase-cta {
     display: flex;
-    align-items: center;
-    gap: 28px;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
     padding-top: 0;
     text-align: center;
   }
@@ -14922,7 +14939,78 @@ body:has(.industry-consulting-page) .ai-chat-widget {
 
   .regulatory-assetization-section {
     background: #ffffff;
-    padding: 132px 0 150px;
+    padding: 0 0 150px;
+  }
+
+  .regulatory-labor-savings-section {
+    background: #ffffff;
+    padding: 0 0 132px;
+  }
+
+  .regulatory-labor-savings-inner {
+    display: grid;
+    width: min(100% - 160px, 1720px);
+    grid-template-columns: minmax(420px, 1fr) minmax(460px, 0.64fr);
+    gap: clamp(72px, 8vw, 190px);
+    align-items: start;
+    margin: 0 auto;
+  }
+
+  .regulatory-labor-savings-copy {
+    padding-top: 8px;
+  }
+
+  .regulatory-labor-savings-copy h2 {
+    margin: 0;
+    color: #050807;
+    font-size: clamp(26px, 2.1vw, 40px);
+    font-weight: 600;
+    line-height: 1.28;
+    letter-spacing: -0.045em;
+    word-break: keep-all;
+  }
+
+  .regulatory-labor-savings-card {
+    overflow: hidden;
+    border-radius: 28px;
+    background: #f7f8fa;
+    padding: 28px;
+  }
+
+  .regulatory-labor-savings-card__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 18px;
+  }
+
+  .regulatory-labor-savings-card h3 {
+    margin: 0;
+    color: #050807;
+    font-size: clamp(20px, 1.18vw, 24px);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.025em;
+    white-space: nowrap;
+  }
+
+  .regulatory-labor-savings-card p {
+    margin: 0;
+    color: #8a98a5;
+    font-size: clamp(12px, 0.78vw, 14px);
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .regulatory-labor-savings-card img {
+    display: block;
+    width: 100%;
+    border-radius: 16px;
+    object-fit: contain;
   }
 
   .regulatory-assetization-inner {
@@ -15064,6 +15152,220 @@ body:has(.industry-consulting-page) .ai-chat-widget {
 
   .regulatory-assetization-panel--launch {
     padding-bottom: 26px;
+  }
+
+  .regulatory-sku-expansion-section {
+    background: #ffffff;
+    padding: 132px 0;
+  }
+
+  .regulatory-sku-expansion-inner {
+    width: min(100% - 160px, 1720px);
+    margin: 0 auto;
+  }
+
+  .regulatory-sku-expansion-head {
+    text-align: center;
+  }
+
+  .regulatory-sku-expansion-head h2 {
+    margin: 0;
+    color: #050807;
+    font-size: clamp(26px, 2.1vw, 40px);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.03em;
+    word-break: keep-all;
+  }
+
+  #regulatory-sku-expansion-title .regulatory-sku-expansion-head__title {
+    color: #050807 !important;
+  }
+
+  #regulatory-sku-expansion-title .regulatory-sku-expansion-head__accent {
+    color: #16834c !important;
+  }
+
+  .regulatory-sku-expansion-head p {
+    margin: 14px 0 0;
+    color: #7e8d9b;
+    font-size: clamp(14px, 0.94vw, 17px);
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    word-break: keep-all;
+  }
+
+  .regulatory-sku-expansion-visuals {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 44px;
+  }
+
+  .regulatory-sku-expansion-visual {
+    position: relative;
+    width: 39%;
+  }
+
+  .regulatory-sku-expansion-visual--products {
+    flex: 0 0 39%;
+  }
+
+  .regulatory-sku-expansion-visual--dashboard {
+    flex: 0 0 39%;
+  }
+
+  .regulatory-sku-expansion-visual img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 22px;
+    object-fit: cover;
+  }
+
+  .regulatory-sku-expansion-visual--dashboard img {
+    transform: none;
+  }
+
+  .regulatory-sku-expansion-visual strong {
+    position: absolute;
+    z-index: 1;
+    top: 9%;
+    margin: 0;
+    color: #172539;
+    font-size: clamp(18px, 1.4vw, 28px);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.04em;
+    text-align: right;
+    word-break: keep-all;
+  }
+
+  .regulatory-sku-expansion-visual--products strong {
+    right: 8%;
+  }
+
+  .regulatory-sku-expansion-visual--dashboard strong {
+    left: 8%;
+    text-align: left;
+  }
+
+  .regulatory-sku-expansion-bridge {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 50%;
+    width: 220px;
+    max-width: 18%;
+    height: 100%;
+    transform: translateX(-50%);
+  }
+
+  .regulatory-sku-expansion-bridge > svg {
+    position: absolute;
+    top: 48%;
+    width: 18px;
+    height: 26px;
+    color: #a2abb7;
+  }
+
+  .regulatory-sku-expansion-bridge > svg:first-child {
+    left: 0;
+  }
+
+  .regulatory-sku-expansion-bridge > svg:nth-of-type(2) {
+    right: 0;
+  }
+
+  .regulatory-sku-expansion-bridge > .regulatory-sku-expansion-bridge__mobile-caret {
+    display: none;
+  }
+
+  .regulatory-sku-expansion-bridge > div {
+    position: absolute;
+    top: 24%;
+    left: 50%;
+    display: flex;
+    width: clamp(58px, 4.6vw, 86px);
+    height: clamp(58px, 4.6vw, 86px);
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #cceffd;
+    color: #0876b8;
+    transform: translateX(-50%);
+  }
+
+  .regulatory-sku-expansion-bridge > div svg {
+    width: 48%;
+    height: 48%;
+  }
+
+  .regulatory-sku-expansion-bridge p {
+    position: absolute;
+    top: 53%;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    color: #71808e;
+    font-size: clamp(14px, 1.05vw, 20px);
+    font-weight: 500;
+    line-height: 1.55;
+    letter-spacing: -0.035em;
+    text-align: center;
+    white-space: nowrap;
+    word-break: keep-all;
+  }
+
+  .regulatory-sku-expansion-benefits {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 34px;
+  }
+
+  .regulatory-sku-expansion-benefits article {
+    display: grid;
+    min-height: 128px;
+    grid-template-columns: 62px minmax(0, 1fr);
+    gap: 20px;
+    align-items: center;
+    border-radius: 20px;
+    background: #ffffff;
+    padding: 22px 24px;
+    box-shadow: 0 12px 28px rgba(20, 40, 31, 0.1);
+  }
+
+  .regulatory-sku-expansion-benefits article > span {
+    display: grid;
+    width: 58px;
+    height: 58px;
+    place-items: center;
+    border-radius: 50%;
+    background: #dff5ff;
+    color: #1689d0;
+  }
+
+  .regulatory-sku-expansion-benefits h3 {
+    margin: 0;
+    color: #111827;
+    font-size: clamp(16px, 1vw, 19px);
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.025em;
+    word-break: keep-all;
+  }
+
+  .regulatory-sku-expansion-benefits p {
+    margin: 8px 0 0;
+    color: #7e8d9b;
+    font-size: clamp(13px, 0.8vw, 15px);
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    word-break: keep-all;
   }
 
   .regulatory-value-section {
@@ -15355,7 +15657,7 @@ body:has(.industry-consulting-page) .ai-chat-widget {
 
   .regulatory-free-report-steps {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 72px minmax(0, 1fr) 72px minmax(320px, 1.42fr) 72px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) 72px minmax(0, 1fr) 72px minmax(0, 1fr) 72px minmax(0, 1fr);
     align-items: center;
     margin: 78px auto 0;
     width: min(100%, 1240px);
@@ -15988,7 +16290,6 @@ body:has(.industry-consulting-page) .ai-chat-widget {
     width: min(100% - 160px, 1720px);
     min-height: 510px;
     grid-template-columns: minmax(0, 0.94fr) minmax(360px, 0.7fr);
-    grid-template-rows: minmax(0, 1fr) auto;
     align-items: center;
     gap: clamp(64px, 9vw, 180px);
     margin: 0 auto;
@@ -16004,10 +16305,6 @@ body:has(.industry-consulting-page) .ai-chat-widget {
     word-break: keep-all;
   }
 
-  .regulatory-resource-cta__copy {
-    grid-row: 1 / -1;
-  }
-
   .regulatory-resource-cta__copy p {
     margin: 28px 0 0;
     color: #71808e;
@@ -16018,14 +16315,12 @@ body:has(.industry-consulting-page) .ai-chat-widget {
     word-break: keep-all;
   }
 
-  .regulatory-resource-cta__inner > a {
+  .regulatory-resource-cta__copy > a {
     display: inline-flex;
     min-height: 68px;
     align-items: center;
     justify-content: center;
-    grid-column: 2;
-    justify-self: center;
-    margin-top: 22px;
+    margin-top: 28px;
     border-radius: 10px;
     background: #40564a;
     color: #ffffff;
@@ -16038,12 +16333,12 @@ body:has(.industry-consulting-page) .ai-chat-widget {
     white-space: nowrap;
   }
 
-  .regulatory-resource-cta__inner > a:hover,
-  .regulatory-resource-cta__inner > a:focus-visible {
+  .regulatory-resource-cta__copy > a:hover,
+  .regulatory-resource-cta__copy > a:focus-visible {
     background: #274335;
   }
 
-  .regulatory-resource-cta__inner > a:active {
+  .regulatory-resource-cta__copy > a:active {
     transform: translateY(1px);
   }
 
@@ -19406,6 +19701,7 @@ body:has(.industry-consulting-page) .ai-chat-widget {
     order: 2;
     width: calc(100% - 40px);
     min-width: 0;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     gap: 14px;
@@ -19703,7 +19999,54 @@ body:has(.industry-consulting-page) .ai-chat-widget {
   }
 
   .regulatory-assetization-section {
-    padding: 86px 0 20px;
+    padding: 0 0 20px;
+  }
+
+  .regulatory-labor-savings-section {
+    padding: 86px 0;
+  }
+
+  .regulatory-labor-savings-inner {
+    width: calc(100% - 40px);
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .regulatory-labor-savings-copy {
+    padding-top: 0;
+  }
+
+  .regulatory-labor-savings-copy h2 {
+    font-size: 24px;
+    line-height: 1.38;
+  }
+
+  .regulatory-labor-savings-copy h2 br {
+    display: none;
+  }
+
+  .regulatory-labor-savings-card {
+    border-radius: 22px;
+    padding: 20px 16px 16px;
+  }
+
+  .regulatory-labor-savings-card__head {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .regulatory-labor-savings-card h3 {
+    font-size: 20px;
+  }
+
+  .regulatory-labor-savings-card p {
+    font-size: 12px;
+    text-align: left;
+  }
+
+  .regulatory-labor-savings-card img {
+    border-radius: 14px;
   }
 
   .regulatory-assetization-inner {
@@ -19791,6 +20134,122 @@ body:has(.industry-consulting-page) .ai-chat-widget {
 
   .regulatory-assetization-panel--launch {
     padding-bottom: 18px;
+  }
+
+  .regulatory-sku-expansion-section {
+    padding: 86px 0;
+  }
+
+  .regulatory-sku-expansion-inner {
+    width: calc(100% - 40px);
+  }
+
+  .regulatory-sku-expansion-head h2 {
+    font-size: 24px;
+    line-height: 1.38;
+  }
+
+  .regulatory-sku-expansion-head p {
+    margin-top: 12px;
+    font-size: 13px;
+  }
+
+  .regulatory-sku-expansion-visuals {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .regulatory-sku-expansion-visual--products,
+  .regulatory-sku-expansion-visual--dashboard {
+    flex-basis: auto;
+    width: 100%;
+  }
+
+  .regulatory-sku-expansion-visual--products {
+    order: 1;
+  }
+
+  .regulatory-sku-expansion-visual--dashboard {
+    order: 3;
+  }
+
+  .regulatory-sku-expansion-visual img {
+    border-radius: 16px;
+  }
+
+  .regulatory-sku-expansion-visual--dashboard img {
+    transform: none;
+  }
+
+  .regulatory-sku-expansion-visual strong {
+    font-size: 18px;
+  }
+
+  .regulatory-sku-expansion-bridge {
+    position: static;
+    display: block;
+    order: 2;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    transform: none;
+  }
+
+  .regulatory-sku-expansion-bridge > svg,
+  .regulatory-sku-expansion-bridge > div {
+    display: none;
+  }
+
+  .regulatory-sku-expansion-bridge > .regulatory-sku-expansion-bridge__mobile-caret {
+    position: static;
+    display: block;
+    width: 18px;
+    height: 18px;
+    margin: 0 auto;
+    color: #a2abb7;
+  }
+
+  .regulatory-sku-expansion-bridge p {
+    position: static;
+    width: auto;
+    margin: 20px 0;
+    font-size: 16px;
+    white-space: normal;
+  }
+
+  .regulatory-sku-expansion-benefits {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .regulatory-sku-expansion-benefits article {
+    min-height: 0;
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 14px;
+    border-radius: 16px;
+    padding: 18px 16px;
+  }
+
+  .regulatory-sku-expansion-benefits article > span {
+    width: 50px;
+    height: 50px;
+  }
+
+  .regulatory-sku-expansion-benefits article > span svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .regulatory-sku-expansion-benefits h3 {
+    font-size: 16px;
+  }
+
+  .regulatory-sku-expansion-benefits p {
+    margin-top: 4px;
+    font-size: 12px;
   }
 
   .regulatory-value-section {
@@ -20232,13 +20691,13 @@ body:has(.industry-consulting-page) .ai-chat-widget {
     line-height: 1.65;
   }
 
-  .regulatory-resource-cta__inner > a {
+  .regulatory-resource-cta__copy > a {
     min-height: 52px;
-    grid-column: auto;
-    margin-top: 0;
+    margin-top: 20px;
     border-radius: 9px;
     font-size: 14px;
     padding: 0 24px;
+    width: 100%;
   }
 
   .regulatory-resource-cta__inner > img {
@@ -20246,10 +20705,6 @@ body:has(.industry-consulting-page) .ai-chat-widget {
     grid-row: auto;
     width: min(72vw, 280px);
     order: 2;
-  }
-
-  .regulatory-resource-cta__inner > a {
-    order: 3;
   }
 
   .regulatory-faq-cta-section {
