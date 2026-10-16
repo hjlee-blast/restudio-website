@@ -152,6 +152,16 @@ export function Footer() {
             <span aria-hidden="true" />
             <a href="mailto:sales@revation.co.kr">sales@revation.co.kr</a>
           </p>
+          <p><strong>패밀리 사이트</strong></p>
+          <a
+            className="site-footer__family-link"
+            href="https://www.revation.co.kr/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img src="/assets/company-revation-logo.svg" alt="REVATION" />
+            리베이션 바로가기
+          </a>
         </address>
       </div>
 

@@ -43,11 +43,11 @@ import {
 import { Link } from "react-router-dom";
 import {
   CustomerCaseStudiesSection,
-  ServiceDetailAdBanner,
   ServiceDetailSharedSections,
 } from "../components/ServiceDetailSharedSections";
 import { AnimatedTitle } from "../components/AnimatedTitle";
-import { NovemberPromotionBannerSlide } from "../components/NovemberPromotionBanner";
+import { HeroBannerGroup } from "../components/HeroBannerGroup";
+import { RegulatoryOnboardingDemo } from "../components/RegulatoryOnboardingDemo";
 
 const productClientLogos = Array.from({ length: 14 }, (_, index) => ({
   src: `/assets/clients/client-logo-${String(index + 1).padStart(2, "0")}.svg`,
@@ -108,16 +108,6 @@ const productTestimonials = [
 const productTestimonialPages = Array.from({ length: 3 }, (_, pageIndex) =>
   productTestimonials.slice(pageIndex * 2, pageIndex * 2 + 2),
 );
-
-const productDevelopmentHeroBanners = [
-  {
-    theme: "product-development-onestop",
-    title: "11월, 신규 회원 대상 무료 이용권 증정, 제품 개발부터 규제 마스터까지.",
-    description: "제품 개발부터 규제 마스터까지.",
-    image: "/assets/ads/november-promotion-banner.png",
-    alt: "11월 신규 회원 무료 이용권 프로모션",
-  },
-];
 
 const productChallenges = [
   {
@@ -1014,30 +1004,7 @@ function RegulatoryHero() {
         </h1>
         <p>AI와 규제 전문가가 함께 진단부터 통과까지 하나의 흐름으로 완성합니다.</p>
 
-        <div className="ad-banner-section ad-banner-section--embedded" aria-label="프로모션 배너">
-          <div className="ad-banner">
-            <div className="ad-banner__track" style={{ transform: "translateX(0%)" }}>
-              <NovemberPromotionBannerSlide />
-            </div>
-
-            <div className="ad-banner__controls">
-              <button type="button" aria-label="이전 광고 배너 보기">
-                <CaretLeft size={19} weight="bold" aria-hidden="true" />
-              </button>
-              <button type="button" aria-label="다음 광고 배너 보기">
-                <CaretRight size={19} weight="bold" aria-hidden="true" />
-              </button>
-              <div className="ad-banner__indicator" aria-hidden="true">
-                <span style={{ transform: "translateX(0%)", width: "100%" }} />
-              </div>
-              <span className="ad-banner__count">1/1</span>
-            </div>
-
-            <span className="sr-only">
-              현재 배너: 11월, 신규 회원 대상 무료 이용권 증정, 제품 개발부터 규제 마스터까지.
-            </span>
-          </div>
-        </div>
+        <HeroBannerGroup />
 
         <form
           className="ai-chat-entry mx-auto mt-4 w-full max-w-[1040px] rounded-2xl px-4 py-4 md:mt-5 md:px-5 md:py-4"
@@ -1110,42 +1077,7 @@ function RegulatoryGrowthSection() {
           ))}
         </div>
 
-        <div className="regulatory-growth-preview" aria-label="PPWR 서류 준비 화면 예시">
-          <div className="regulatory-growth-preview__stage">
-            <div className="regulatory-growth-dashboard">
-              <img
-                src="/assets/detail-pages/regulatory-product-detail.png"
-                alt="리스튜디오 PPWR 포장재 관리 대시보드 화면"
-              />
-            </div>
-            <div className="regulatory-growth-floating-panel">
-              <strong>1. 포장 데이터</strong>
-              <p>보호해야 할 제품과 포장 구성을 선택하세요.</p>
-              <div className="regulatory-growth-segment">
-                <span>용기·캡</span>
-                <span>라벨·박스</span>
-              </div>
-              <p>필요한 증빙 유형을 선택하면 AI가 누락 자료를 정리합니다.</p>
-              <div className="regulatory-growth-checks">
-                <span>
-                  <i />
-                  <b>재질</b>
-                  자동 검토
-                </span>
-                <span>
-                  <i />
-                  <b>시험</b>
-                  자동 검토
-                </span>
-                <span>
-                  <i />
-                  <b>선언</b>
-                  자동 검토
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <RegulatoryOnboardingDemo />
       </div>
     </section>
   );
@@ -1258,6 +1190,8 @@ function RegulatoryConcernSection() {
 }
 
 function RegulatoryMasterShowcaseSection() {
+  const [activeCard, setActiveCard] = useState(0);
+  const cardCount = regulatoryMasterShowcaseCards.length;
   const sectionRef = useRef<HTMLElement | null>(null);
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
@@ -1288,6 +1222,11 @@ function RegulatoryMasterShowcaseSection() {
       const offset = -horizontalProgress * trackDistance;
 
       track.style.setProperty("--regulatory-master-offset", `${offset}px`);
+      const cards = track.children;
+      const step = (cards[1] as HTMLElement).offsetLeft - (cards[0] as HTMLElement).offsetLeft;
+      setActiveCard(
+        horizontalProgress >= 0.999 ? cardCount - 1 : Math.min(Math.round(-offset / step), cardCount - 1),
+      );
     };
 
     const requestUpdate = () => {
@@ -1304,7 +1243,25 @@ function RegulatoryMasterShowcaseSection() {
       window.removeEventListener("scroll", requestUpdate);
       window.removeEventListener("resize", requestUpdate);
     };
-  }, []);
+  }, [cardCount]);
+
+  const moveCard = (direction: number) => {
+    const section = sectionRef.current;
+    const viewport = viewportRef.current;
+    const track = trackRef.current;
+    if (!section || !viewport || !track) return;
+
+    const nextCard = (activeCard + direction + cardCount) % cardCount;
+    const cards = track.children;
+    const step = (cards[1] as HTMLElement).offsetLeft - (cards[0] as HTMLElement).offsetLeft;
+    const distance = Math.max(track.scrollWidth - viewport.clientWidth, 0);
+    const progress = distance > 0 ? Math.min(nextCard * step / distance, 1) : 0;
+    window.scrollTo({
+      top: window.scrollY + section.getBoundingClientRect().top
+        + progress * (section.offsetHeight - window.innerHeight),
+      behavior: "smooth",
+    });
+  };
 
   return (
     <section
@@ -1334,6 +1291,16 @@ function RegulatoryMasterShowcaseSection() {
               놓치지 마세요.
             </p>
           </div>
+        </div>
+
+        <div className="regulatory-master-showcase-controls">
+          <button type="button" aria-label="이전 솔루션 보기" onClick={() => moveCard(-1)}>
+            <CaretLeft size={24} aria-hidden="true" />
+          </button>
+          <button type="button" aria-label="다음 솔루션 보기" onClick={() => moveCard(1)}>
+            <CaretRight size={24} aria-hidden="true" />
+          </button>
+          <span aria-live="polite">{activeCard + 1}/{cardCount}</span>
         </div>
 
         <div className="regulatory-master-showcase-viewport" ref={viewportRef}>
@@ -1865,24 +1832,8 @@ function RegulatoryStartSection() {
 
         <RegulatoryReportSteps steps={regulatoryStartSteps} />
 
-        <RegulatoryStartCta />
       </div>
     </section>
-  );
-}
-
-function RegulatoryStartCta() {
-  return (
-    <div className="regulatory-start-cta">
-      <div>
-        <h2>내일하면 늦습니다. 지금 받고 PPWR 제대로 준비하세요</h2>
-        <p>AI가 1차 진단하고, 전문가가 최종 보증하는 단 하나의 솔루션</p>
-      </div>
-      <div className="regulatory-start-cta__actions">
-        <Link to="/project-management/quote?service=regulatory-response">무료로 진단받기</Link>
-        <Link to="/resources">자료 먼저 보기</Link>
-      </div>
-    </div>
   );
 }
 
@@ -2806,10 +2757,7 @@ export function ServiceDetailPage({ variant }: ServiceDetailPageProps) {
                 ]}
               />
             </h1>
-            <ServiceDetailAdBanner
-              banners={productDevelopmentHeroBanners}
-              embedded
-            />
+            <HeroBannerGroup />
             <form
               className="ai-chat-entry mx-auto mt-4 max-w-[1040px] rounded-2xl px-4 py-4 md:mt-5 md:px-5 md:py-4"
               onSubmit={(event) => event.preventDefault()}
